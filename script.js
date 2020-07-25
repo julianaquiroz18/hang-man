@@ -1,3 +1,6 @@
+/**
+ * Global Variables
+ */
 const baseURL = "http://hang-man-api.herokuapp.com/"
 const button = document.querySelector(".start");
 const hiddenWord = document.querySelector(".hidden-word");
@@ -22,8 +25,12 @@ let word = [];
 let missCounter = 0;
 let status;
 
+/**
+ * Events
+ */
 button.addEventListener("click", start);
 document.addEventListener("keydown", listenKeyboard);
+
 
 function start() {
     status = "playing";
@@ -36,11 +43,15 @@ function listenKeyboard(e) {
         checkCharacterBody["characters"][0] = e.key;
         verifyCharacter();
     } else {
-        alert("YOU WON!");
+        alert("Press START to play again!");
     }
 
 }
 
+/**
+ * @method paintInitialstate
+ * @description Display game uI initial state  
+ */
 function paintInitialstate() {
     graphics(0);
     document.querySelector(".instruction").textContent = "Press any key!!!";
@@ -48,9 +59,13 @@ function paintInitialstate() {
         word[letter] = "_";
     }
     hiddenWord.textContent = word.join(" ");
-    console.log(word);
 }
 
+/**
+ * @method graphics
+ * @description Draw hang-man status
+ * @param number  
+ */
 function graphics(stepNumber) {
     const image = document.querySelector(".hangman-picture");
     fetch(`${baseURL}v1/step/${stepNumber}`)
@@ -64,6 +79,11 @@ function graphics(stepNumber) {
         .catch(error => console.log(error))
 }
 
+/**
+ * @method getComplexity
+ * @description Asign complexity to body required by fetch in getWord function
+ * @param string  
+ */
 function getComplexity(complexity) {
     fetch(`${baseURL}v1/genword/${complexity}`)
         .then(response => response.json())
@@ -74,6 +94,10 @@ function getComplexity(complexity) {
         .catch(error => console.log(error))
 }
 
+/**
+ * @method getWord
+ * @description Get hidden-word  
+ */
 function getWord() {
     object = {
         method: 'POST',
@@ -85,13 +109,15 @@ function getWord() {
         .then(response => {
             wordID = response.id;
             length = response.length;
-            console.log(wordID);
-            console.log(length);
             paintInitialstate();
         })
         .catch(error => console.log(error))
 }
 
+/**
+ * @method verifyCharacter
+ * @description Check if the characters belongs to hidden-word 
+ */
 function verifyCharacter() {
     object = {
         method: 'POST',
@@ -110,11 +136,13 @@ function verifyCharacter() {
         .then(response => {
             hitAction(response.word_characters)
         })
-        .catch(error =>
-            console.log(error)
-        )
+        .catch(error => console.log(error))
 }
 
+/**
+ * @method missAction
+ * @description Actions executed when the charater does not belong to hidden-word
+ */
 function missAction() {
     hitMessage.textContent = "";
     missMessage.textContent = `You failed! Character "${checkCharacterBody["characters"][0]}" is not valid`;
@@ -127,6 +155,18 @@ function missAction() {
     }
 }
 
+function displayLostMessage() {
+    setTimeout(() => {
+        missMessage.textContent = "";
+        status = "finish";
+        alert("¡¡¡ GAME OVER !!!");
+    }, 100);
+}
+
+/**
+ * @method missAction
+ * @description Actions executed when the charater belongs to hidden-word
+ */
 function hitAction(wordArray) {
     missMessage.textContent = "";
     hitMessage.textContent = `You guessed right! Character "${checkCharacterBody["characters"][0]}" is valid`;
@@ -136,17 +176,13 @@ function hitAction(wordArray) {
         }
     })
     hiddenWord.textContent = word.join(" ");
-    console.log(word.join(""))
     verifyWord();
 }
 
-function displayLostMessage() {
-    setTimeout(() => {
-        missMessage.textContent = "";
-        alert("¡¡¡ GAME OVER !!!");
-    }, 100);
-}
-
+/**
+ * @method verifyWord
+ * @description Verify if the word is correct
+ */
 function verifyWord() {
     object = {
         method: 'HEAD',
@@ -161,8 +197,5 @@ function verifyWord() {
                 throw new Error("Wrong word");
             }
         })
-        .catch(error =>
-            console.log(error)
-        )
-
+        .catch(error => console.log(error))
 }
