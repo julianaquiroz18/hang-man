@@ -54,7 +54,7 @@ function listenKeyboard(e) {
  */
 function paintInitialstate() {
     graphics(0);
-    document.querySelector(".instruction").textContent = "Press any key!!!";
+    document.querySelector(".instruction").textContent = "Press any key! (lowercase)";
     for (let letter = 0; letter < length; letter++) {
         word[letter] = "_";
     }

@@ -1,0 +1,41 @@
+main {
+    display: flex;
+    width: 500px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 5px greenyellow solid;
+}
+
+select {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    outline: none;
+}
+
+button {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 10px;
+    width: 80px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: greenyellow;
+    outline: none;
+}
+
+.hidden-word {
+    font-size: 30px;
+}
+
+.miss-message {
+    color: red;
+}
+
+.hit-message {
+    color: green;
+}
