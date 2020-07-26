@@ -1,7 +1,7 @@
 /**
  * Global Variables
  */
-const baseURL = "http://hang-man-api.herokuapp.com/"
+const baseURL = "https://hang-man-api.herokuapp.com/"
 const button = document.querySelector(".start");
 const hiddenWord = document.querySelector(".hidden-word");
 const missMessage = document.querySelector(".miss-message");
