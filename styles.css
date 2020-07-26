@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 main {
     display: flex;
     width: 500px;
@@ -8,6 +13,7 @@ main {
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border: 5px greenyellow solid;
+    box-sizing: border-box;
 }
 
 select {
@@ -26,6 +32,7 @@ button {
     border-radius: 15px;
     background-color: greenyellow;
     outline: none;
+    cursor: pointer;
 }
 
 .hidden-word {

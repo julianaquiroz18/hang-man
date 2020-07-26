@@ -1,7 +1,7 @@
 /**
  * Global Variables
  */
-const baseURL = "https://hang-man-api.herokuapp.com/"
+const baseURL = "https://hang-man-api.herokuapp.com/";
 const button = document.querySelector(".start");
 const hiddenWord = document.querySelector(".hidden-word");
 const missMessage = document.querySelector(".miss-message");
@@ -9,15 +9,15 @@ const hitMessage = document.querySelector(".hit-message");
 const myHeaders = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-}
+};
 let getWordBody = {
     "complexity": "",
-}
+};
 let checkCharacterBody = {
     "characters": [
         ""
     ]
-}
+};
 
 let wordID;
 let length;
@@ -71,12 +71,12 @@ function graphics(stepNumber) {
     fetch(`${baseURL}v1/step/${stepNumber}`)
         .then(response => response.json())
         .then(response => {
-            image.src = `data:image/data;base64,${response.image}`
+            image.src = `data:image/data;base64,${response.image}`;
             if (missCounter >= 9) {
                 displayLostMessage();
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
 
 /**
@@ -91,7 +91,7 @@ function getComplexity(complexity) {
             getWordBody["complexity"] = response.complexity;
             getWord();
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
 
 /**
@@ -103,7 +103,7 @@ function getWord() {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(getWordBody),
-    }
+    };
     fetch(`${baseURL}v1/word`, object)
         .then(response => response.json())
         .then(response => {
@@ -111,7 +111,7 @@ function getWord() {
             length = response.length;
             paintInitialstate();
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
 
 /**
@@ -123,7 +123,7 @@ function verifyCharacter() {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(checkCharacterBody),
-    }
+    };
     fetch(`${baseURL}v1/word/${wordID}`, object)
         .then(response => {
             if (response.ok) {
@@ -134,9 +134,9 @@ function verifyCharacter() {
             }
         })
         .then(response => {
-            hitAction(response.word_characters)
+            hitAction(response.word_characters);
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
 
 /**
@@ -174,7 +174,7 @@ function hitAction(wordArray) {
         if (letter != "_") {
             word[index] = letter;
         }
-    })
+    });
     hiddenWord.textContent = word.join(" ");
     verifyWord();
 }
@@ -186,7 +186,7 @@ function hitAction(wordArray) {
 function verifyWord() {
     object = {
         method: 'HEAD',
-    }
+    };
     fetch(`${baseURL}v1/word/${wordID}/${word.join("")}`, object)
         .then(response => {
             if (response.ok) {
@@ -197,5 +197,5 @@ function verifyWord() {
                 throw new Error("Wrong word");
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
