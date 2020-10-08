@@ -3,7 +3,7 @@
 
 This project was done using just vanilla JavaScript.
 
-You can see and play [here](https://julianaquiroz18.github.io/hang-man/)!
+You can see it and play [here](https://julianaquiroz18.github.io/hang-man/)!
 
 
 ## The challenge
